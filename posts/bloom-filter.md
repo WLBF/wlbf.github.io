@@ -13,7 +13,7 @@ tags: [algorithm]
 * **搜索：**使用 `k` 个 hash 函数对新元素进行计算，得到 `k` 个不同的位置，检查 bit 数组中这些位置是否全部为 1，如果符合则返回 true。
 
 <div align="center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Bloom_filter.svg/974px-Bloom_filter.svg.png" width="70%" height="70%">
+    <img src="../assets/images/Bloom_filter.svg" width="70%" height="70%">
 </div>
 
 ## 参数选择

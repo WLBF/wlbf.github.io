@@ -10,7 +10,7 @@ tags: [distributed-system, kafka]
 ## Kafka Architecture and Design Principles
 
 <div align="center">
-    <img src="https://i.imgur.com/ZyEshQA.png" width="60%" height="60%">
+    <img src="../assets/images/ZyEshQA.png" width="60%" height="60%">
 </div>
 
 相同类型的消息流称为 topic。producer 会向 topic 发布消息。发布的消息会被存储在 broker 中。consumer 会从 broker 订阅一个或多个 topic，通过从 broker 拉取数据来消费消息。一个 kafka 集群中会有多个 broker。为了均衡负载一个 topic 会被划分成多个 partition，每个 broker 会存储一个或多个 partition。
@@ -39,7 +39,7 @@ for (message : streams[0]) {
 #### Simple storage:
 
 <div align="center">
-    <img src="https://i.imgur.com/QNUdQMl.png" width="60%" height="60%">
+    <img src="../assets/images/QNUdQMl.png" width="60%" height="60%">
 </div>
 
 kafka 的存储结构十分简单。每一个 partition 对应一个 logical log。一个 log 由多个大小近似（1GB）的 segment file 组成。每次 producer 发布消息，broker 只是简单的将消息追加在最后一个 log 的最后一个 segment file 末尾。为了提升性能 segment file 不会每条信息都 flush 磁盘，而是累积一定数量的消息或达到一定的时间间隔才会 flush 磁盘。一条消息只有被 flush 到磁盘上之后才对 consumer 可见。

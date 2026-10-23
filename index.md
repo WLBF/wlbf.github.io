@@ -1,4 +1,8 @@
-# wlbf.github.io
+---
+layout: home.njk
+title: Notes on systems & software
+permalink: /index.html
+---
 
 [Windows Azure Storage](./posts/windows-azure-storage.md)  
 [Log Rotate](./posts/log-rotate.md)  
@@ -26,3 +30,4 @@
 [String Match](./posts/string-match.md)  
 [JavaScript Timer](./posts/javascript-timer.md)  
 [Hello World](./posts/hello-world.md)  
+[Linux iptables](./posts/linux-iptables.md)

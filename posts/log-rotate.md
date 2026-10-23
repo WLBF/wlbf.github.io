@@ -24,7 +24,7 @@ tags: [os, fs]
 下图展示了文件系统的层次结构，省略了部分 journaling 相关的结构。首先是 inode 层提供了文件这一抽象，通过 inode num 访问 inode 的信息可以读取属于该文件的 block。directory 层的实现是一种特殊的 inode，这种 inode 的内容是一系列 directory 条目，每个条目包括文件的名称和文件的 inode num。pathname 层提供了层级式的文件路径抽象，能够递归地访问文件。file descriptor 层是系统资源的抽象（管道、设备、文件等等）。用户态程序一般通过 file descriptor 来访问文件。接下来会详细介绍每一层抽象的实现原理。
 
 <div align="center">
-    <img src="https://i.imgur.com/uxjwWNY.png">
+    <img src="../assets/images/uxjwWNY.png">
 </div>
 
 ## 磁盘
@@ -32,7 +32,7 @@ tags: [os, fs]
 传统磁盘被看做是一种块设备，即使整个存储空间被均匀地分割成多个 block，每个 block 都有一个唯一的 block num，一般从 0 开始线性增长。程序通过 block num 寻址访问 block。block size 一般为 512 bytes，较新的磁盘 block size 则为 4096 bytes。
 
 <div align="center">
-    <img src="https://i.imgur.com/tDKzzoh.png">
+    <img src="../assets/images/tDKzzoh.png">
 </div>
 
 文件系统会将磁盘的不同 block num 范围划分为不同的段，不同的段集中存储同类型的数据。例如 Inodes 段用于存储所有 Inodes 的信息，bitmap 段用于记录磁盘块的使用情况，包括哪些 block 已经被使用，哪些 block 是空闲的。 data 段则用于存储真正的数据内容。
@@ -76,7 +76,7 @@ struct ext2_inode {
 inode 中主要存储了文件的元数据，例如文件的类型、大小、链接数、数据地址等信息。inode 组织数据的方式类似虚拟内存，通过多级 pointer 使得大小固定的 inode 数据结构可以承载非常巨大的文件，还能够支持文件打洞（hole punching）功能，后文会有更详细的描述，缺点是多级 pointer 会在访问文件时带来磁盘 io 放大。这里的 block pointer 即为前文中描述的 block num，下图展示了两级 data block 的示意图，inode 首先有固定数量的 pointer 直接指向存储数据的 block，之后会有一个 pointer 指向一个内容为多个 pointer 的 block，这个 block 中的 pointer 才指向真正的数据块。以此类推可以有多级结构，可以指数级扩大 inode 能够承载的文件大小。
 
 <div align="center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Ext2-inode.svg" width="80%" height="80%">
+    <img src="../assets/images/Ext2-inode.svg" width="80%" height="80%">
 </div>
 
 
@@ -94,7 +94,7 @@ inode 中主要存储了文件的元数据，例如文件的类型、大小、�
 目录实际上只是一种具有特殊类型的 inode，目录 inode 的数据内用是多个顺序存储的条目。以下展示了 ext2 文件系统的条目结构，包括了 inode number，类型和名称。这里的名字就是 inode number 指向文件或目录的名字。多层目录构成了文件系统的树形结构，可能有多个名字不同条目指向同一个 inode，这种指向关系被称作（hard link）。inode 结构体种的 i_link_count 就代表了有多少条目指向自己，即指向自己的硬链接计数，删除文件的操作实际上就是删除指向 inode 的硬链接。硬链接计数为 0 的 inode 会被标记为空闲，代表着文件被删除。也就是说如果有一个文件有两个硬链接路径指向自己，只有两个路径都被删除之后，文件才可能被删除。
 
 <div align="center">
-    <img src="https://i.imgur.com/UG3lCoX.png" width="80%" height="80%">
+    <img src="../assets/images/UG3lCoX.png" width="80%" height="80%">
 </div>
 
 
@@ -126,7 +126,7 @@ struct ext2_dir_entry {
 重命名顾名思义指的就是在日志文件满足某些判断条件时，重命名当前的文件，创建名称和原文件相同的新文件，然后删除过期的文件。但此时有个问题，重命名文件只是修改目录 inode 中的条名称，inode num 并没有变化，原先进程的文件对象依然指向同一个 inode，进程还是会持续向重命名之后的文件写入日志，如果直接删除日志文件，背后的 inode 依然不会被释放，进程还是会不断向这个 inode 写入日志直到磁盘写满。解决办法就是发出一个通知让进程重新打开原路径的文件，这样写入日志的目标 inode 就完成了切换。通常的做法是发出一个 SIGHUP 信号给进程，进程事先向内核注册相应的回调函数重新打开特定的文件 fd。通过重命名来进行日志翻转，优点是资源消耗少且过程迅速，缺点是需要写日志进程相互配合。
 
 <div align="center">
-    <img src="https://i.imgur.com/MkkxTrN.png">
+    <img src="../assets/images/MkkxTrN.png">
 </div>
 
 ### Copy Truncate
@@ -161,7 +161,7 @@ copy truncate 方式能够实现日志进程无感知的情况下进行日志翻
 观察下图中 round1 到 round2 的过程，可以预料到 log.txt 文件开头的洞会随着翻转次数的增加而随之增大，按照 logrotate 的用户态稀疏拷贝实现，性能不可避免地会出现劣化。也许可以通过 lseek 的 SEEK_DATA 选项直接跳过文件开头的洞，然后使用 sendfile 进行文件复制。这样应该可以实现一个更高效率的拷贝函数。这种日志翻转方式还有一个缺点，在复制完成到清空文件的间隔中应用进程还在不断写入日志，一次翻转过程可能会导致一小部分日志丢失。
 
 <div align="center">
-    <img src="https://i.imgur.com/xW5e1Ip.png">
+    <img src="../assets/images/xW5e1Ip.png">
 </div>
 
 ## 参考

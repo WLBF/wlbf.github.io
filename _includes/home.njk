@@ -1,0 +1,12 @@
+---
+layout: base.njk
+---
+<section class="intro">
+  <p class="eyebrow">A PERSONAL NOTEBOOK</p>
+  <h1>Small notes.<br>Deep dives<span class="dot">.</span></h1>
+  <p class="lede">Exploring systems, software, and how things work.<br>A collection of things learned along the way.</p>
+</section>
+<section class="archive" aria-labelledby="archive-heading">
+  <div class="section-heading"><h2 id="archive-heading">The notebook</h2><span>IDEAS / EXPLORATIONS / NOTES</span></div>
+  <div class="post-list">{{ content | safe }}</div>
+</section>

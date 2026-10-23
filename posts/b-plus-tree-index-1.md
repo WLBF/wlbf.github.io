@@ -12,7 +12,7 @@ CMU-15445 课程的 project 2 是完整实现一个支持并发的 B+ Tree Index
 A B+Tree is a self-balancing tree data structure that keeps data sorted and allows searches, sequential access, insertion, and deletions in O(log(n)). It is optimized for disk-oriented DBMS’s that read/write large blocks of data.
 
 <div align="center">
-    <img src="https://i.imgur.com/HjYlZc7.png" width="70%" height="70%">
+    <img src="../assets/images/HjYlZc7.png" width="70%" height="70%">
 </div>
 
 Formally, a B+Tree is an M-way search tree with the following properties:
@@ -49,13 +49,13 @@ which leaf node to insert the key into.
 
 Example:
 1. Insert 11 into leaf page 5.  
-![tree-insert-00](https://i.imgur.com/pbjMtR2.png)
+![tree-insert-00](../assets/images/pbjMtR2.png)
   
 2. Leaf page 5 reach max size.  
-![tree-insert-01](https://i.imgur.com/dbbLz4a.png)
+![tree-insert-01](../assets/images/dbbLz4a.png)
   
 3. Leaf page 5 split, insert leaf page 6 to root page, root page reach max size.  
-![tree-insert-02](https://i.imgur.com/mvExwTB.png)
+![tree-insert-02](../assets/images/mvExwTB.png)
   
 4. Root page split and populate new root page 8.  
-![tree-insert-03](https://i.imgur.com/vjiTTdG.png)
+![tree-insert-03](../assets/images/vjiTTdG.png)

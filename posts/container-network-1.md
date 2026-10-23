@@ -13,7 +13,7 @@ bridge 是 docker 默认的网络模型，bridge 网络模型解决了单宿主�
 
 基本的网络拓扑图如下所示：：
 
-![bridge](https://i.imgur.com/mU1pWyv.png)
+![bridge](../assets/images/mU1pWyv.png)
 
 1. 首先创建两个 netns 网络命名空间：
 

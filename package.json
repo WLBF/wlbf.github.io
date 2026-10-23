@@ -1,0 +1,20 @@
+{
+  "name": "wlbf-blog",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.7",
+    "@mdit/plugin-katex": "^1.1.4",
+    "katex": "^0.19.0",
+    "markdown-it": "^15.0.3",
+    "markdown-it-anchor": "^10.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>{% if title %}{{ title }} · {% endif %}wlbf</title>
+  <meta name="description" content="{{ description or title or 'Notes on systems, software, and how things work.' }}">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="wlbf home">w<span>l</span>bf<span class="dot">.</span></a>
+    <nav aria-label="Main navigation"><a href="/">Notes</a><a href="https://github.com/wlbf">GitHub ↗</a></nav>
+  </header>
+  <main id="main">{{ content | safe }}</main>
+  <footer class="site-footer"><a href="/">wlbf</a><span>Notes on systems &amp; software.</span><a href="#main">Back to top ↑</a></footer>
+</body>
+</html>

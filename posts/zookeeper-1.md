@@ -10,7 +10,7 @@ date: 2021-07-13 01:21:41
 ## Service Overview
 
 <div align="center">
-    <img src="https://i.imgur.com/IMBGOi4.png" width="50%" height="50%">
+    <img src="../assets/images/IMBGOi4.png" width="50%" height="50%">
 </div>
 
 zookeeper 的数据抽象为多个 data node(znode) 的集合，znode 按照类似文件系统的嵌套 namespace 来组织。client 通过一个 znode 的路径来访问特定的 znode。znode 有两种类型：
@@ -55,7 +55,7 @@ update api 带有 version 参数，用于实现条件更新，如果 version 参
 ## ZooKeeper Implementation
 
 <div align="center">
-    <img src="https://i.imgur.com/4ZesRIS.png" width="60%" height="60%">
+    <img src="../assets/images/4ZesRIS.png" width="60%" height="60%">
 </div>
 
 每个 zookeeper server 都会维护一份完整的数据在内存中，znode 默认最大为 1mb。
@@ -87,7 +87,7 @@ zookeeper 并不提供严格的线性一致性，而是提供了写操作的线�
 client 操作 FIFO 顺序是通过 zxid 来实现的，zxid 的大小定义了 write 和 read 操作之间的顺序关系，每一个 write 操作会返回一个 zxid，也可以理解成 transaction 在 log 中的 index。每一个 read request 都会携带 zxid，来确保 client 不会读到该 zxid 之前的数据。
 
 <div align="center">
-    <img src="https://i.imgur.com/C1OiBqC.png" width="80%" height="80%">
+    <img src="../assets/images/C1OiBqC.png" width="80%" height="80%">
 </div>
 
 case1: Client0 执行 write0 操作成功后返回 zxid(3)，但此时 txn3 还没有被复制到 Follower0 上，Client0 此时向 Follower0 执行 read0 操作，由于 Follower0 当前最新的 zxid 小于 read0 操作的 zxid，Follower0 必须一直等待到同步到 txn3 才会返回。

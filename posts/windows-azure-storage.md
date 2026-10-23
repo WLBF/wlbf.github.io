@@ -29,7 +29,7 @@ Fabric Controller 负责 Windows Azure Cloud 资源的分配管理，提供了�
 
 如下图所示 WAS 由 Storage Stamp 和 Location Service 组成
 
-![pic-1](https://i.imgur.com/LziX4mb.png)
+![pic-1](../assets/images/LziX4mb.png)
 
 ### WAS Architectural Components 
 
@@ -51,7 +51,7 @@ Fabric Controller 负责 Windows Azure Cloud 资源的分配管理，提供了�
 
 Stream layer 给 partition layer 提供了 stream 接口，partition layer 能够对 stream 进行 open, close, delete, rename, rename, read, append to 等操作。一个 stream 由一系列 extent pointers 组成，一个 extent 由一系列 block 连接而成。
 
-![pic-2](https://i.imgur.com/pYZE4ar.png)
+![pic-2](../assets/images/pYZE4ar.png)
 
 **Block** - 最小数据读写单元，blocks 大小可以不相同。stream layer 每次读取 block 会验证该 block 的 checksum。整个系统的全部 block 也会定期进行 checksum 验证来确保数据完整性。  
 
@@ -61,7 +61,7 @@ Stream layer 给 partition layer 提供了 stream 接口，partition layer 能�
 
 ### Stream Manager and Extent Nodes
 
-![pic-3](https://i.imgur.com/iobUe2C.png)
+![pic-3](../assets/images/iobUe2C.png)
 
 **Stream Manager (SM)** - SM 记录了 stream 的名字，extents 构成，和 extents 在 Extent Nodes(EN) 上的分布。SM 是一个标准 paxos 集群，不在请求的 critical path 上。SM 负责：
 
@@ -131,7 +131,7 @@ OT 支持 query/get, insert, update, delete 操作，还支持同一 PartitionNa
 **Partition Server (PS)** - 服务 RangePartition 请求，通过 lease 保证同一个 RangePartition 只有一个 PS提供服务。一个 PS 可以服务多个 OT 的 RangePartition。   
 **Lock Service** - Paxos 服务用于实现分布式 lease。
 
-![pic-4](https://i.imgur.com/VT0Uc6v.png)
+![pic-4](../assets/images/VT0Uc6v.png)
 
 ### RangePartition Data Structures
 
@@ -149,7 +149,7 @@ RangePartition 使用 Log-Structured Merge-Tree 结构存储持久化数据，�
 
 只有 Blob Table 同时使用 Row Data Stream 和 Blob Data Stream，Row Data Stream 用于存储 blob data index。
 
-![pic-5](https://i.imgur.com/HcF3veK.png)
+![pic-5](../assets/images/HcF3veK.png)
 
 #### In-Memory Data Structures
 
