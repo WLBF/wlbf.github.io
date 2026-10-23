@@ -7,6 +7,11 @@
   --accent:#0969da;
   --panel:#f6f8fa;
   --code:#818b981f;
+  --text-small:.75rem;
+  --text-ui:.875rem;
+  --text-body:1rem;
+  --text-code:.8125rem;
+  --text-title:clamp(1.75rem,1.5rem + 1vw,2rem);
 }
 * {
   box-sizing:border-box;
@@ -20,7 +25,7 @@ body {
   background:var(--paper);
   color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-  font-size:14px;
+  font-size:var(--text-ui);
   line-height:1.5;
   -webkit-font-smoothing:antialiased;
 }
@@ -43,7 +48,6 @@ a:focus-visible {
   margin-inline:auto;
 }
 .site-header {
-  background:var(--panel);
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -52,7 +56,7 @@ a:focus-visible {
 }
 .wordmark {
   font-family:inherit;
-  font-size:24px;
+  font-size:1.5rem;
   font-weight:600;
   letter-spacing:normal;
   color:var(--ink);
@@ -69,7 +73,7 @@ nav {
   gap:32px;
 }
 nav a {
-  font-size:14px;
+  font-size:var(--text-ui);
   color:var(--ink);
   text-decoration:none;
 }
@@ -80,7 +84,7 @@ nav a:hover {
   padding:86px 0 72px;
 }
 .eyebrow,.section-heading>span,.post-top>span {
-  font-size:11px;
+  font-size:var(--text-small);
   letter-spacing:.5px;
   color:var(--muted);
   font-weight:600;
@@ -124,7 +128,8 @@ nav a:hover {
   text-decoration:none;
   padding:21px 8px;
   border-bottom:1px solid var(--line);
-  font-size:14px;
+  font-size:var(--text-body);
+  line-height:1.5;
   transition:background .15s;
 }
 .post-list a:after {
@@ -144,7 +149,7 @@ nav a:hover {
   border-top:1px solid var(--line);
   margin-top:96px;
   padding:28px 0 40px;
-  font-size:12px;
+  font-size:var(--text-small);
   color:var(--muted);
 }
 .site-footer a {
@@ -157,7 +162,7 @@ nav a:hover {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  font-size:13px;
+  font-size:var(--text-ui);
 }
 .post-top a,.post-bottom a {
   text-decoration:none;
@@ -166,12 +171,12 @@ nav a:hover {
   max-width:760px;
   margin:0 auto;
   overflow-wrap:anywhere;
-  font-size:16px;
-  line-height:1.5;
+  font-size:var(--text-body);
+  line-height:1.65;
 }
 .prose h1 {
   font-family:inherit;
-  font-size:32px;
+  font-size:var(--text-title);
   line-height:1.25;
   font-weight:600;
   letter-spacing:normal;
@@ -179,21 +184,38 @@ nav a:hover {
 }
 .prose h2 {
   margin:2.4em 0 .7em;
-  font-size:24px;
+  font-size:1.5rem;
   font-weight:600;
   line-height:1.25;
   letter-spacing:normal;
 }
 .prose h3 {
-  font-size:20px;
+  font-size:1.25rem;
+  font-weight:600;
   margin-top:2em;
   line-height:1.25;
 }
 .prose p,.prose ul,.prose ol {
   margin:1.25em 0;
 }
+.prose h4,.prose h5,.prose h6 {
+  font-size:var(--text-body);
+  font-weight:600;
+  line-height:1.5;
+}
+.prose h6 {
+  color:var(--muted);
+}
+.prose a {
+  font-size:inherit;
+}
 .prose li {
   padding-left:5px;
+}
+.prose .post-date {
+  margin:-32px 0 32px;
+  color:var(--muted);
+  font-size:var(--text-ui);
 }
 .prose li+li {
   margin-top:.35em;
@@ -211,13 +233,16 @@ nav a:hover {
   background:var(--panel);
   border:1px solid var(--line);
   border-radius:6px;
-  font-size:13px;
+  font-size:var(--text-code);
   line-height:1.5;
   overflow-wrap:normal;
 }
 .prose code {
   font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,"Liberation Mono",monospace;
   font-size:.86em;
+}
+.prose pre code {
+  font-size:inherit;
 }
 .prose :not(pre)>code {
   background:var(--code);
@@ -234,7 +259,7 @@ nav a:hover {
   display:block;
   overflow:auto;
   border-collapse:collapse;
-  font-size:15px;
+  font-size:var(--text-ui);
 }
 .prose td,.prose th {
   padding:10px 16px;
@@ -290,7 +315,7 @@ nav a:hover {
     height:84px;
   }
   .wordmark {
-    font-size:24px;
+    font-size:1.25rem;
   }
   nav {
     gap:22px;
@@ -308,7 +333,6 @@ nav a:hover {
     display:none;
   }
   .post-list a {
-    font-size:14px;
     gap:16px;
     padding-block:19px;
   }
@@ -323,9 +347,6 @@ nav a:hover {
   }
   .site-footer>a:last-child {
     margin-left:auto;
-  }
-  .prose {
-    font-size:16px;
   }
   .prose pre {
     padding:16px;

@@ -1,4 +1,7 @@
 # Windows Azure Storage
+<!-- ---
+date: 2023-04-02
+--- -->
 
 ## Introduction
 

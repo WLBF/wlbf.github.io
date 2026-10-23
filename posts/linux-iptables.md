@@ -1,6 +1,7 @@
 # Linux Iptables
 <!-- ---
 title: Linux Iptables
+date: 2022-01-11
 tags: [linux, network]
 --- -->
 
